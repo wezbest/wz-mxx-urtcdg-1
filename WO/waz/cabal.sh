@@ -45,7 +45,7 @@ cwb() {
     fi
 
     local overall_status=0
-    local output_file="wallet_balances_$(date +%Y-%m-%d).txt"
+    local output_file="bal/wallet_balances_$(date +%Y-%m-%d).txt"
 
     # Initialize the output file
     echo "Wallet Balance Check - $(date)" >"$output_file"
