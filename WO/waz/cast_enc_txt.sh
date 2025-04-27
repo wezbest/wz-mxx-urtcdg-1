@@ -104,9 +104,10 @@ EOF
     )
 
     local -a keyz=(
-        "0x3f03926cdb1f85a7b189060f53b0d055eb8c0cc9a838e929525eded8d7440dde"
-        "0x6ce075e337c519ed35567152183557bbfec6d8c33d480464539a1fa2fd53dc04"
-        "0xf66f5d4d5e2c7477f1139c94308732eb962309c2808838be8d7331f1a0b6806c"
+        "0x15e64abfed3218cfe2ea1117e38eedb0a51990544534700e61cd803674be31ff"
+        "0xe1eae1464d5fe82c12606b62ccdbe0eccb90e2d2134417b459dfb9dfda09f684"
+        "0x17c674a1c7e43761479d09d76864c49d516e217006d965ae9df1fbf02ccc241d"
+
     )
 
     # Network Configurations (Format: "NetworkName:RPC_URL")
@@ -115,8 +116,14 @@ EOF
         "https://eth-holesky.g.alchemy.com/v2/YfG5-esHajH3FpsLvC4eMFMEFYl9Lqcg"
     )
 
+    # Chains
+    local -a chains=(
+        "sepolia"
+        "holesky"
+    )
+
     CO1="cast send \
-  --chain SEPOLIA \
+  --chain ${chains[1]} \
   --rpc-url ${networks[1]} \
   --private-key ${keyz[0]} \
   ${wallets[1]} ${hex_out} "
