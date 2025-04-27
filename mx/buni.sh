@@ -21,7 +21,7 @@ hea1() {
 }
 
 bun_pussy() {
-    # Bun init start 
+    # Bun init start
     hea1 "Buni: Sexy ass and pussy"
 
     # Get Name of project
@@ -47,7 +47,7 @@ bun_pussy() {
 }
 
 bun_basic() {
-    # Bare bones install 
+    # Bare bones install
     hea1 "Bun Basic Install"
 
     # Get Name of project
@@ -66,11 +66,11 @@ bun_basic() {
     echo -e "--- Initiate ${CO1} ---"
     eval "$CO1"
     echo -e "--- Init Bun Basic ---"
-    eval "$CO2" 
+    eval "$CO2"
     echo -e "${GREEN}***** Installation Completed *****${NC}"
 }
 
-# Menu Function 
+# Menu Function
 menu_choice() {
     clear
     hea1 "Installation Menu"
