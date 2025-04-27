@@ -81,8 +81,9 @@ EOF
 
 # Send data with the transaction
 ca_send_hex() {
-    hea1 "Use cast to send hex data"
+    hea1 "Use cast to send hex data to multiple chains"
 
+    # ASCII art data
     read -r -d '' dataz <<'EOF'
 
  ███████╗ ███╗   ███╗ ███████╗ ██╗      ██╗      ██████╗   █████╗  ███╗   ██╗ ████████╗ ██╗   ██╗
@@ -94,42 +95,176 @@ ca_send_hex() {
 
 EOF
 
-    make_data="cast fa \"$dataz\""
-    hex_out=$(eval "$make_data")
+    # Convert data to hex
+    hex_out=$(cast fa "$dataz")
 
+    # Wallet and key configurations
     local -a wallets=(
-        "0x2ce40e5d9BC00dA5f397690E83E88183c4d4b23F"
-        "0x5508D7e21f7B096481AfCc9bA2e2a405Be96b878"
-        "0x2C1381655097598Bae22c5326b0F3B43220a18c4"
+        "0x991A0FF9529bbC4E1b66cdb47e44DEeD1FcEE999" # Sender wallet
+        "0x99F23c70837aa99175939077D34F20896CE8D399" # Recipient 1
+        "0x995D96C5f70087cd6eA3c4F5eB8Ab7DeC3fDbe99" # Recipient 2
     )
 
     local -a keyz=(
-        "0x3f03926cdb1f85a7b189060f53b0d055eb8c0cc9a838e929525eded8d7440dde"
-        "0x6ce075e337c519ed35567152183557bbfec6d8c33d480464539a1fa2fd53dc04"
-        "0xf66f5d4d5e2c7477f1139c94308732eb962309c2808838be8d7331f1a0b6806c"
+        "0x15e64abfed3218cfe2ea1117e38eedb0a51990544534700e61cd803674be31ff" # Sender private key
+        "0xe1eae1464d5fe82c12606b62ccdbe0eccb90e2d2134417b459dfb9dfda09f684" # Alternate key 1
+        "0x17c674a1c7e43761479d09d76864c49d516e217006d965ae9df1fbf02ccc241d" # Alternate key 2
     )
 
-    # Network Configurations (Format: "NetworkName:RPC_URL")
-    local -a networks=(
-        "https://eth-sepolia.g.alchemy.com/v2/YfG5-esHajH3FpsLvC4eMFMEFYl9Lqcg"
-        "https://eth-holesky.g.alchemy.com/v2/YfG5-esHajH3FpsLvC4eMFMEFYl9Lqcg"
+    # Chain configurations (name:rpc_url)
+    local -A chains=(
+        ["sepolia"]="https://eth-sepolia.g.alchemy.com/v2/YfG5-esHajH3FpsLvC4eMFMEFYl9Lqcg"
+        ["holesky"]="https://eth-holesky.g.alchemy.com/v2/YfG5-esHajH3FpsLvC4eMFMEFYl9Lqcg"
     )
 
-    CO1="cast send \
-  --chain SEPOLIA \
-  --rpc-url ${networks[1]} \
-  --private-key ${keyz[0]} \
-  ${wallets[1]} ${hex_out} "
+    # Create log file with current date
+    local log_file="send_hex_$(date +%Y-%m-%d_%H-%M-%S).log"
+    echo "Transaction Log - $(date)" >"$log_file"
+    echo "----------------------------------------" >>"$log_file"
 
-    eval "$CO1" 2>&1
-    if [ $? -ne 0 ]; then
-        echo -e "${RED}Error: ${send_output}${NC}"
-        return 1 # Indicate failure
+    # Send to each chain
+    local success_count=0
+    local fail_count=0
+
+    for chain in "${!chains[@]}"; do
+        echo -e "\n${BLUE}Processing $chain chain...${NC}" | tee -a "$log_file"
+
+        local command="cast send \
+            --chain $chain \
+            --rpc-url ${chains[$chain]} \
+            --private-key ${keyz[0]} \
+            ${wallets[1]} ${hex_out}"
+
+        echo "[$(date +%T)] Executing: $command" >>"$log_file"
+
+        local send_output
+        send_output=$(eval "$command" 2>&1)
+        local exit_code=$?
+
+        if [ $exit_code -ne 0 ]; then
+            echo -e "${RED}Error on $chain: ${send_output}${NC}" | tee -a "$log_file"
+            ((fail_count++))
+        else
+            local tx_hash=$(echo "$send_output" | grep transactionHash | awk '{print $2}')
+            echo -e "${GREEN}$chain successful! ${NC}" | tee -a "$log_file"
+            echo -e "Transaction hash: ${CYAN}$tx_hash${NC}" | tee -a "$log_file"
+            ((success_count++))
+        fi
+
+        echo "----------------------------------------" >>"$log_file"
+        sleep 1 # Brief pause between chain transactions
+    done
+
+    # Summary
+    echo -e "\n${WHITE}Transaction Summary:${NC}" | tee -a "$log_file"
+    echo -e "${GREEN}Successful: $success_count${NC}" | tee -a "$log_file"
+    echo -e "${RED}Failed: $fail_count${NC}" | tee -a "$log_file"
+    echo -e "Detailed log: ${YELLOW}$log_file${NC}"
+
+    # Return status
+    if [ $fail_count -gt 0 ]; then
+        return 1
+    else
+        return 0
     fi
-    echo -e "${GREEN}Transaction successful: ${send_output}${NC}"
-    echo -e "${GREEN}Transaction hash: ${send_output}${NC}"
+}
 
+# Send Reading File Data
+ca_send_hex_file() {
+    hea1 "Use cast to send hex data to multiple chains"
+
+    # Configuration
+    local ART_FILE="artz.txt" # Path to your ASCII art file
+
+    # Verify art file exists and is not empty
+    if [[ ! -f "$ART_FILE" ]]; then
+        echo -e "${RED}Error: Art file '$ART_FILE' not found${NC}"
+        return 1
+    fi
+
+    if [[ ! -s "$ART_FILE" ]]; then
+        echo -e "${RED}Error: Art file '$ART_FILE' is empty${NC}"
+        return 1
+    fi
+
+    # Read ASCII art from external file
+    dataz=$(<"$ART_FILE")
+
+    # Convert data to hex
+    hex_out=$(cast fa "$dataz")
+
+    # Wallet and key configurations
+    local -a wallets=(
+        "0x991A0FF9529bbC4E1b66cdb47e44DEeD1FcEE999" # Sender wallet
+        "0x99F23c70837aa99175939077D34F20896CE8D399" # Recipient 1
+        "0x995D96C5f70087cd6eA3c4F5eB8Ab7DeC3fDbe99" # Recipient 2
+    )
+
+    local -a keyz=(
+        "0x15e64abfed3218cfe2ea1117e38eedb0a51990544534700e61cd803674be31ff" # Sender private key
+        "0xe1eae1464d5fe82c12606b62ccdbe0eccb90e2d2134417b459dfb9dfda09f684" # Alternate key 1
+        "0x17c674a1c7e43761479d09d76864c49d516e217006d965ae9df1fbf02ccc241d" # Alternate key 2
+    )
+
+    # Chain configurations (name:rpc_url)
+    local -A chains=(
+        ["sepolia"]="https://eth-sepolia.g.alchemy.com/v2/YfG5-esHajH3FpsLvC4eMFMEFYl9Lqcg"
+        ["holesky"]="https://eth-holesky.g.alchemy.com/v2/YfG5-esHajH3FpsLvC4eMFMEFYl9Lqcg"
+    )
+
+    # Create log file with current date
+    local log_file="send_hex_$(date +%Y-%m-%d_%H-%M-%S).log"
+    echo "Transaction Log - $(date)" >"$log_file"
+    echo "----------------------------------------" >>"$log_file"
+    echo "ASCII Art Source: ${ART_FILE}" >>"$log_file"
+    echo "----------------------------------------" >>"$log_file"
+
+    # Send to each chain
+    local success_count=0
+    local fail_count=0
+
+    for chain in "${!chains[@]}"; do
+        echo -e "\n${BLUE}Processing $chain chain...${NC}" | tee -a "$log_file"
+
+        local command="cast send \
+            --chain $chain \
+            --rpc-url ${chains[$chain]} \
+            --private-key ${keyz[0]} \
+            ${wallets[1]} ${hex_out}"
+
+        echo "[$(date +%T)] Executing: $command" >>"$log_file"
+
+        local send_output
+        send_output=$(eval "$command" 2>&1)
+        local exit_code=$?
+
+        if [ $exit_code -ne 0 ]; then
+            echo -e "${RED}Error on $chain: ${send_output}${NC}" | tee -a "$log_file"
+            ((fail_count++))
+        else
+            local tx_hash=$(echo "$send_output" | grep transactionHash | awk '{print $2}')
+            echo -e "${GREEN}$chain successful! ${NC}" | tee -a "$log_file"
+            echo -e "Transaction hash: ${CYAN}$tx_hash${NC}" | tee -a "$log_file"
+            ((success_count++))
+        fi
+
+        echo "----------------------------------------" >>"$log_file"
+        sleep 1 # Brief pause between chain transactions
+    done
+
+    # Summary
+    echo -e "\n${WHITE}Transaction Summary:${NC}" | tee -a "$log_file"
+    echo -e "${GREEN}Successful: $success_count${NC}" | tee -a "$log_file"
+    echo -e "${RED}Failed: $fail_count${NC}" | tee -a "$log_file"
+    echo -e "Detailed log: ${YELLOW}$log_file${NC}"
+
+    # Return status
+    if [ $fail_count -gt 0 ]; then
+        return 1
+    else
+        return 0
+    fi
 }
 
 # Execution
-ca_send_hex
+ca_send_hex_file

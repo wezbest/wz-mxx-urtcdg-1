@@ -170,22 +170,25 @@ EOF
 }
 
 # Send Reading File Data
-ca_send_hex_readfile() {
+ca_send_hex_file() {
     hea1 "Use cast to send hex data to multiple chains"
 
     # Configuration
     local ART_FILE="artz.txt" # Path to your ASCII art file
-    local DEFAULT_ART="No art file found or file is empty"
 
-    # Read ASCII art from external file or use default
-    if [[ -f "$ART_FILE" && -s "$ART_FILE" ]]; then
-        dataz=$(<"$ART_FILE")
-    else
-        echo -e "${YELLOW}Warning: Art file '$ART_FILE' not found or empty, using default art${NC}"
-        read -r -d '' dataz <<EOF
-$DEFAULT_ART
-EOF
+    # Verify art file exists and is not empty
+    if [[ ! -f "$ART_FILE" ]]; then
+        echo -e "${RED}Error: Art file '$ART_FILE' not found${NC}"
+        return 1
     fi
+
+    if [[ ! -s "$ART_FILE" ]]; then
+        echo -e "${RED}Error: Art file '$ART_FILE' is empty${NC}"
+        return 1
+    fi
+
+    # Read ASCII art from external file
+    dataz=$(<"$ART_FILE")
 
     # Convert data to hex
     hex_out=$(cast fa "$dataz")
@@ -264,4 +267,4 @@ EOF
 }
 
 # Execution
-ca_send_hex_readfile
+ca_send_hex_file
