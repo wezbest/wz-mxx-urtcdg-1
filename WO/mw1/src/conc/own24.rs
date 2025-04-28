@@ -111,18 +111,18 @@ fn learn5() {
     // println!("{:#?}", account.holder.yellow());
 }
 
-// Case 6
+// Case 6 - Talking about partial move. Which is also not allowed
 
 fn learn6_print_holder(holder: String) {
     println!("{:#?}", holder.magenta());
 }
 
 fn learn6() {
-    header("Cass 6 - Borrowing a value");
+    header("Cass 6 - Partial Move Error");
 
-    let account = Account::new(
-        6, 
-        String:from("PantySmeller")
-    );
+    let account = Account::new(6, String::from("PantySmeller"));
 
+    learn6_print_holder(account.holder);
+
+    learn1_print_account(account);
 }
