@@ -8,7 +8,7 @@ use yansi::Paint;
 
 pub fn conc_main() {
     pswg("Chapter 24 - Ownership in Rust".to_string());
-    learn1();
+    learn2();
 }
 
 ///////////// Actual code starts here /////////////
@@ -43,7 +43,7 @@ impl Bank {
     }
 }
 
-fn learn1_print_account(account: &Account) {
+fn learn1_print_account(account: Account) {
     println!("{:#?}", account.yellow());
 }
 
@@ -56,5 +56,15 @@ fn learn1() {
     // learn1_print_account(&account);
 
     let other_bank = bank;
-    println!("{:#?}", bank);
+    // println!("{:#?}", bank);
+    println!("{:#?}", other_bank.yellow()); // <- Works 
+}
+
+fn learn2() {
+    header("Ownershi in Rust 2");
+
+    let account = Account::new(1, String::from("Pussy Licker"));
+
+    learn1_print_account(account);
+    learn1_print_account(account);
 }
