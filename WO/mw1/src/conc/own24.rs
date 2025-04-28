@@ -13,6 +13,7 @@ pub fn conc_main() {
     // learn4();
     // learn5();
     // learn6();
+    learn7();
 }
 
 ///////////// Actual code starts here /////////////
@@ -128,3 +129,11 @@ fn learn6() {
 }
 
 // Resuming form Section 30
+
+fn learn7_print_holder(holder: String) {
+    println!("{:#?}", holder.magenta());
+}
+
+fn learn7() {
+    header("Learn 7 - Writing Useful Code with ownership");
+}
