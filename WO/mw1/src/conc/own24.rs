@@ -59,7 +59,7 @@ fn learn1() {
     // println!("{:#?}", bank);
     println!("{:#?}", other_bank.yellow()); // <- Works 
 }
-
+// Code is for illustrationg values that get moved
 fn learn2() {
     header("Ownershi in Rust 2");
 
