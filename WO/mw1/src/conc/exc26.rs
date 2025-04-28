@@ -30,8 +30,16 @@ impl Account {
     }
 }
 
+fn ex1_print_accouunt(account: Account) {
+    println!("{:#?}", account.green())
+}
+
 fn ex1() {
     header("Excercise 1");
 
     let account = Account::new(1, String::from("BootySniffer"));
+
+    // TODO: Write and call a funcion that will *take ownership* of the account value, prin it, and return nothing
+
+    println!("{}", account.green());
 }
