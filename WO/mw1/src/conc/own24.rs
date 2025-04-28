@@ -85,10 +85,14 @@ fn learn3() {
     // println!("{:#?}", account.yellow());
 }
 
-// Case 4 -
+// Case 4 - Borrowed of move example
 
 fn learn4() {
-    header("Case 4");
+    header("Case 4 - Borrow of moved example");
 
-    let bank = Bank::new()
+    let bank = Bank::new();
+
+    let account = bank.accounts;
+
+    println!("{:#?}", bank.accounts.yellow());
 }
