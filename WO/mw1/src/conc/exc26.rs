@@ -9,6 +9,7 @@ use yansi::Paint;
 ////////////// Main Function calls//////////////////
 pub fn exc26_main() {
     pswg("Chapter 26 - Excercises".to_string());
+    ex1();
 }
 
 ////// Excercise Functions here //////////
@@ -41,5 +42,8 @@ fn ex1() {
 
     // TODO: Write and call a funcion that will *take ownership* of the account value, prin it, and return nothing
 
-    println!("{}", account.green());
+    println!("{:#?}", account.green());
+
+    // Can u call this function twice
+    println!("{:#?}", account.green());
 }
