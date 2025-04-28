@@ -9,7 +9,7 @@ use yansi::Paint;
 ////////////// Main Function calls//////////////////
 pub fn exc26_main() {
     pswg("Chapter 26 - Excercises".to_string());
-    ex1();
+    ex2();
 }
 
 ////// Excercise Functions here //////////
@@ -31,6 +31,8 @@ impl Account {
     }
 }
 
+// --- Excercise 1 ---
+
 fn ex1_print_accouunt(account: Account) {
     println!("{:#?}", account.green())
 }
@@ -46,5 +48,8 @@ fn ex1() {
     ex1_print_accouunt(account);
 
     // Can u call this function twice
-    println!("{:#?}", account.green());
+    // println!("{:#?}", account.green());
 }
+
+/// --- Excercise 2 ---
+

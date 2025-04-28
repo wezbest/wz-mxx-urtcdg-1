@@ -14,4 +14,5 @@
 | [`mytest`](./mytest/) | Main testing directory all the files are for testing ideas which will be called in `main.rs` |
 |     [`s1`](./s1/)     |                                        Section 1 work                                        |
 |   [`sec3`](./sec3/)   |                                Section 3 work in this folder                                 |
-|   [`sec3`](./conc/)   |                                   Testing varius concepts                                    |
+|   [`conc`](./conc/)   |                                   Testing varius concepts                                    |
+|   [`conc`](./conc/)   |                                   Testing varius concepts                                    |
