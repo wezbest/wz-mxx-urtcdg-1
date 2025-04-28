@@ -88,7 +88,7 @@ fn ex2() {
     If so, what error do you think you'll get?
     */
 
-    ex2_print_bank(bank);
+    // ex2_print_bank(bank);
 
     /*
     If so, whar error do you think you'll get?
