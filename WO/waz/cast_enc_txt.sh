@@ -213,7 +213,7 @@ ca_send_hex_file() {
     )
 
     # Create log file with current date
-    local log_file="send_hex_$(date +%Y-%m-%d_%H-%M-%S).log"
+    local log_file="logz/send_hex_$(date +%Y-%m-%d_%H-%M-%S).log"
     echo "Transaction Log - $(date)" >"$log_file"
     echo "----------------------------------------" >>"$log_file"
     echo "ASCII Art Source: ${ART_FILE}" >>"$log_file"
