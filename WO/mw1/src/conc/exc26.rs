@@ -42,7 +42,8 @@ fn ex1() {
 
     // TODO: Write and call a funcion that will *take ownership* of the account value, prin it, and return nothing
 
-    println!("{:#?}", account.green());
+    // println!("{:#?}", account.green());
+    ex1_print_accouunt(account);
 
     // Can u call this function twice
     println!("{:#?}", account.green());
