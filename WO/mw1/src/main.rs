@@ -3,7 +3,7 @@ Main entry point for the Rust application.
 */
 
 mod conc;
-mod sec3;
+// mod sec3;
 mod utils;
 
 // use sec3::bank1::bank1_main;

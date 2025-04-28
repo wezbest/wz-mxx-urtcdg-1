@@ -12,7 +12,7 @@ pub fn conc_main() {
     // learn3();
     // learn4();
     // learn5();
-    learn6();
+    // learn6();
 }
 
 ///////////// Actual code starts here /////////////
@@ -126,3 +126,5 @@ fn learn6() {
 
     // learn1_print_account(account);
 }
+
+// Resuming form Section 30
