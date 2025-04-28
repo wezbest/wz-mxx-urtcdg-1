@@ -43,9 +43,15 @@ impl Bank {
     }
 }
 
+fn learn1_print_account(account: &Account) {
+    println!("{:#?}", account.yellow());
+}
+
 fn learn1() {
     header("Ownership in Rust");
 
     let bank = Bank::new();
     let account = Account::new(1, String::from("John Doe"));
+
+    println!()
 }
