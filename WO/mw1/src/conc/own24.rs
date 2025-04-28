@@ -7,8 +7,45 @@ use crate::utils::{header, pswg};
 use yansi::Paint;
 
 pub fn conc_main() {
-    let header = r"
-Chapter 24 - Ownership and Borrowing
-- Concept testing";
-    pswg(header);
+    pswg("Chapter 24 - Ownership in Rust".to_string());
+    learn1();
+}
+
+///////////// Actual code starts here /////////////
+
+// * Main struct
+#[derive(Debug)]
+struct Account {
+    balance: u32,
+    id: u32,
+    holder: String,
+}
+
+impl Account {
+    fn new(id: u32, holder: String) -> Self {
+        Account {
+            id,
+            holder,
+            balance: 0,
+        }
+    }
+}
+
+// Bank Struct that holds the Account structs
+#[derive(Debug)]
+struct Bank {
+    accounts: Vec<Account>,
+}
+
+impl Bank {
+    fn new() -> Self {
+        Bank { accounts: vec![] }
+    }
+}
+
+fn learn1() {
+    header("Ownership in Rust");
+
+    let bank = Bank::new();
+    let account = Account::new(1, String::from("John Doe"));
 }
