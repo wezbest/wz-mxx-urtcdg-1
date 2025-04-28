@@ -134,6 +134,14 @@ fn learn7_print_holder(holder: String) {
     println!("{:#?}", holder.magenta());
 }
 
+fn learn7_print_account(account: Account) {
+    println!("{:#?}", account.yellow());
+}
+
 fn learn7() {
     header("Learn 7 - Writing Useful Code with ownership");
+
+    let account = Account::new(7, String::from("WomanSniffer"));
+
+    learn7_print_holder(account);
 }
