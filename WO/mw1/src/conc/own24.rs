@@ -10,7 +10,8 @@ pub fn conc_main() {
     pswg("Chapter 24 - Ownership in Rust".to_string());
     // learn2();
     // learn3();
-    learn4();
+    // learn4();
+    learn5();
 }
 
 ///////////// Actual code starts here /////////////
@@ -86,7 +87,6 @@ fn learn3() {
 }
 
 // Case 4 - Borrowed of move example
-
 fn learn4() {
     header("Case 4 - Borrow of moved example");
 
@@ -94,5 +94,18 @@ fn learn4() {
 
     let account = bank.accounts;
 
-    println!("{:#?}", bank.accounts.yellow());
+    // println!("{:#?}", bank.accounts.yellow());
+}
+
+// Case 5 - Borrowing a value
+fn learn5() {
+    header("Case 5");
+
+    let account = Account::new(5, String::from("FartBoy"));
+
+    // accounnt from l104 , gets moved here
+    learn1_print_account(account);
+
+    // This will fail since the value is moved
+    println!("{:#?}", account.holder.yellow());
 }
