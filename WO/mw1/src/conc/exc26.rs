@@ -51,5 +51,8 @@ fn ex1() {
     // println!("{:#?}", account.green());
 }
 
-/// --- Excercise 2 ---
+// --- Excercise 2 ---
 
+fn ex2() {
+    header("Excercise 2");
+}
