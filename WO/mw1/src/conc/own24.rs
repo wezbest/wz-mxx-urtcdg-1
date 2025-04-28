@@ -124,5 +124,5 @@ fn learn6() {
 
     learn6_print_holder(account.holder);
 
-    learn1_print_account(account);
+    // learn1_print_account(account);
 }
