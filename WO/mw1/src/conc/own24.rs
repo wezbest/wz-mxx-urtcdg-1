@@ -75,4 +75,7 @@ fn learn3() {
     header("Case 3 - Ownership in Rust");
 
     let account = Account::new(3, String::from("BootyBoy"));
+
+    let list_of_accounts = vec![account];
+    // println!("{:#?}", account.yellow());
 }
