@@ -8,7 +8,8 @@ use yansi::Paint;
 
 pub fn conc_main() {
     pswg("Chapter 24 - Ownership in Rust".to_string());
-    learn2();
+    // learn2();
+    learn3();
 }
 
 ///////////// Actual code starts here /////////////
@@ -66,5 +67,12 @@ fn learn2() {
     let account = Account::new(1, String::from("Pussy Licker"));
 
     learn1_print_account(account);
-    learn1_print_account(account);
+    // learn1_print_account(account);
+}
+
+// Case 3
+fn learn3() {
+    header("Case 3 - Ownership in Rust");
+
+    let account = Account::new(3, String::from("BootyBoy"));
 }
