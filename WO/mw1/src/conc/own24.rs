@@ -11,7 +11,8 @@ pub fn conc_main() {
     // learn2();
     // learn3();
     // learn4();
-    learn5();
+    // learn5();
+    learn6();
 }
 
 ///////////// Actual code starts here /////////////
@@ -107,5 +108,21 @@ fn learn5() {
     learn1_print_account(account);
 
     // This will fail since the value is moved
-    println!("{:#?}", account.holder.yellow());
+    // println!("{:#?}", account.holder.yellow());
+}
+
+// Case 6
+
+fn learn6_print_holder(holder: String) {
+    println!("{:#?}", holder.magenta());
+}
+
+fn learn6() {
+    header("Cass 6 - Borrowing a value");
+
+    let account = Account::new(
+        6, 
+        String:from("PantySmeller")
+    );
+
 }
