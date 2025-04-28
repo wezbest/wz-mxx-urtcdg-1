@@ -68,14 +68,29 @@ fn ex2_print_bank(bank: Bank) {
     println!("{:#?}", bank.green())
 }
 
+fn ex2_print_accounts(accounts: Vec<Account>) {
+    println!("List of acounts  - {:#?}", accounts.green())
+}
+
 fn ex2() {
     header("Excercise 2");
 
+    let bank = Bank::new();
+
     /*
     TODO: Write and call a function that will *take ownership* of the Banks "accounts" field, print it and return nothing
+    */
 
+    ex2_print_accounts(bank.accounts);
+
+    /*
     Once you've finished the to-do, uncomment the print_bank call below. When your function + print_bank run, do you tink you'll end up getting an error?
+    If so, what error do you think you'll get?
+    */
 
+    ex2_print_bank(bank);
+
+    /*
     If so, whar error do you think you'll get?
      */
 }
