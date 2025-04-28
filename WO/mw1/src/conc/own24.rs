@@ -134,14 +134,18 @@ fn learn7_print_holder(holder: String) {
     println!("{:#?}", holder.magenta());
 }
 
-fn learn7_print_account(account: Account) {
+fn learn7_print_account(account: Account) -> Account {
     println!("{:#?}", account.yellow());
+    account
 }
 
 fn learn7() {
     header("Learn 7 - Writing Useful Code with ownership");
 
-    let account = Account::new(7, String::from("WomanSniffer"));
+    let mut account = Account::new(7, String::from("WomanSniffer"));
 
-    learn7_print_holder(account);
+    account = learn7_print_account(account);
+    account = learn7_print_account(account);
+
+    println!("{:#?}", account.yellow());
 }
