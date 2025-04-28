@@ -31,9 +31,20 @@ impl Account {
     }
 }
 
+#[derive(Debug)]
+struct Bank {
+    accounts: Vec<Account>,
+}
+
+impl Bank {
+    fn new() -> Self {
+        Bank { accounts: vec![] }
+    }
+}
+
 // --- Excercise 1 ---
 
-fn ex1_print_accouunt(account: Account) {
+fn ex1_print_account(account: Account) {
     println!("{:#?}", account.green())
 }
 
@@ -45,7 +56,7 @@ fn ex1() {
     // TODO: Write and call a funcion that will *take ownership* of the account value, prin it, and return nothing
 
     // println!("{:#?}", account.green());
-    ex1_print_accouunt(account);
+    ex1_print_account(account);
 
     // Can u call this function twice
     // println!("{:#?}", account.green());
@@ -53,6 +64,18 @@ fn ex1() {
 
 // --- Excercise 2 ---
 
+fn ex2_print_bank(bank: Bank) {
+    println!("{:#?}", bank.green())
+}
+
 fn ex2() {
     header("Excercise 2");
+
+    /*
+    TODO: Write and call a function that will *take ownership* of the Banks "accounts" field, print it and return nothing
+
+    Once you've finished the to-do, uncomment the print_bank call below. When your function + print_bank run, do you tink you'll end up getting an error?
+
+    If so, whar error do you think you'll get?
+     */
 }
