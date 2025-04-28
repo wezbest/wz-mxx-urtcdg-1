@@ -32,4 +32,6 @@ impl Account {
 
 fn ex1() {
     header("Excercise 1");
+
+    let account = Account::new(1, String::from("BootySniffer"));
 }
