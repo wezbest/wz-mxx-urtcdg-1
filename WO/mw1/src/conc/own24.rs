@@ -51,7 +51,10 @@ fn learn1() {
     header("Ownership in Rust");
 
     let bank = Bank::new();
-    let account = Account::new(1, String::from("John Doe"));
+    // let account = Account::new(1, String::from("John Doe"));
+    // Print the account
+    // learn1_print_account(&account);
 
-    println!()
+    let other_bank = bank;
+    println!("{:#?}", bank);
 }
