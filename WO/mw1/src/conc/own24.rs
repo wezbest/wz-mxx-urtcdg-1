@@ -9,7 +9,8 @@ use yansi::Paint;
 pub fn conc_main() {
     pswg("Chapter 24 - Ownership in Rust".to_string());
     // learn2();
-    learn3();
+    // learn3();
+    learn4();
 }
 
 ///////////// Actual code starts here /////////////
@@ -70,12 +71,24 @@ fn learn2() {
     // learn1_print_account(account);
 }
 
-// Case 3
+// Case 3 - account value is being borrowed
 fn learn3() {
     header("Case 3 - Ownership in Rust");
 
+    // Account declared here
     let account = Account::new(3, String::from("BootyBoy"));
 
+    // Then value is moved here
     let list_of_accounts = vec![account];
+
+    // This function will fail since it is being borrowed to print
     // println!("{:#?}", account.yellow());
+}
+
+// Case 4 -
+
+fn learn4() {
+    header("Case 4");
+
+    let bank = Bank::new()
 }
