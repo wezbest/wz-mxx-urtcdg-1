@@ -8,5 +8,28 @@ use yansi::Paint;
 
 ////////////// Main Function calls//////////////////
 pub fn exc26_main() {
-    pswg("Chapter 24 - Excercises".to_string());
+    pswg("Chapter 26 - Excercises".to_string());
+}
+
+////// Excercise Functions here //////////
+
+#[derive(Debug)]
+struct Account {
+    balance: u32,
+    id: u32,
+    holder: String,
+}
+
+impl Account {
+    fn new(id: u32, holder: String) -> Self {
+        Account {
+            id,
+            holder,
+            balance: 0,
+        }
+    }
+}
+
+fn ex1() {
+    header("Excercise 1");
 }
