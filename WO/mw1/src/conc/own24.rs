@@ -103,7 +103,7 @@ fn learn4() {
 fn learn5() {
     header("Case 5");
 
-    let account = Account::new(5, String::from("FartBoy"));
+    let account = Account::new(5, String::from("WomanFartSmell"));
 
     // accounnt from l104 , gets moved here
     learn1_print_account(account);
