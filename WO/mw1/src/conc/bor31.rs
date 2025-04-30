@@ -42,7 +42,7 @@ impl Bank {
 
 //// Function 1
 
-fn br1_print_account(account: Account) {
+fn br1_print_account(account: &Account) {
     println!("{:#?}", account.yellow());
 }
 
@@ -51,7 +51,9 @@ fn br1() {
 
     let account = Account::new(1, String::from("Func Onner"));
 
-    br1_print_account(account);
+    let account_ref = &account;
+
+    br1_print_account(account_ref);
 
     println!("{:#?}", account.cyan());
 }
