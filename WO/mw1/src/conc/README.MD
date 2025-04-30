@@ -13,4 +13,12 @@
 
 # Filez
 
-Decription of the files
+1. Decription of the files
+2. The files are suffixed with a number that corresponds to the video from the tutorials
+
+|          filez           |                                                Description                                                |
+| :----------------------: | :-------------------------------------------------------------------------------------------------------: |
+| [`exc26.rs`](./exc26.rs) |                               c26- Execrises being done regarding ownership                               |
+| [`own24.rs`](./own24.rs) |                               c24 - Leraning all the ownershp concepts here                               |
+| [`bor31.rs`](./bor31.rs) |                                  c31 - Learning borrowing concepts here                                   |
+|   [`mod.rs`](./mod.rs)   | Modules which are the above mentioned files hav to be declared here so that it can be called in `main.rs` |
