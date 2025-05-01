@@ -54,8 +54,10 @@ fn br1() {
     // Dont need to store the borrowed reference.
     let account_ref = &account;
 
-    br1_print_account(account_ref);
+    // Printing the account reference directly
     br1_print_account(&account);
+
+    br1_print_account(account_ref);
 
     println!("{:#?}", account.cyan());
 }
