@@ -97,10 +97,10 @@ fn br2() {
     let account_ref2 = &account;
 
     // Moving values to the borrowed reference
-    let other_account = account;
+    // let other_account = account;
 
     // Printing the account reference directly
-    br1_print_account(&account);
+    // br1_print_account(&account);
 
     br1_print_account(account_ref);
 
