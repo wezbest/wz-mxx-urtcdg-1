@@ -49,18 +49,15 @@ impl Bank {
 // method like this: 'bank.accounts.len()'
 
 fn ex1_print_num_accounts(bank: &Bank) {
-    println!(
-        "Number of accounts in the bank: {}",
-        bank.accounts.len().green()
-    );
+    println!("----\n Acc NUm {} \n-----", bank.accounts.len().green());
 }
 
 fn ex1() {
     header("Exercise 1");
 
     let mut bank = Bank::new();
-    let account1 = Account::new(1, String::from("me"));
-    let account2 = Account::new(1, String::from("me"));
+    let account1 = Account::new(1, String::from("me1"));
+    let account2 = Account::new(1, String::from("me2"));
 
     bank.accounts.push(account1);
     bank.accounts.push(account2);
