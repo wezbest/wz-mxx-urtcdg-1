@@ -11,5 +11,6 @@ exc26 - Chapter 26 - Rust Excercises
 #![allow(unused_variables)]
 #![allow(unused_imports)]
 
-pub mod bor31;
-pub mod own24;
+// pub mod bor31;
+// pub mod own24;
+pub mod mur35;
