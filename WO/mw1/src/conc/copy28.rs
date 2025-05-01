@@ -8,8 +8,7 @@ use yansi::Paint;
 ////////////// Main Function calls//////////////////
 pub fn kopy28_main() {
     pswg("38 - Copyable VAlues".to_string());
-    // learn1();
-    learn2();
+    learn1();
 }
 
 ///////////////// Structs and Impl ////
@@ -40,43 +39,11 @@ impl Bank {
 
 ////////////// learn1  Functions ////////////
 
-fn learn1_print_account(account: &Account) {
-    println!("{:#?}", account.yellow());
-}
-
-fn learn1_change_account(account: &mut Account) {
-    account.balance += 100;
-}
-
 fn learn1() {
-    header("L1 - Regarding Mutable References");
+    let num = 69;
 
-    let mut account = Account::new(1, String::from("Func Onner"));
+    // here a copy is being done implicitly, so there is no ownership value
+    let other_num = num;
 
-    let account_ref = &mut account;
-
-    // learn1_change_account(&mut account);
-
-    // println!("Account after change: {:#?}", account.yellow());
-    println!("Account after change: {:#?}", account_ref.holder.yellow());
-}
-
-//// Function 2 ////
-
-fn learn2_print_account(account: &Account) {
-    println!("{:#?}", account.yellow());
-}
-
-fn learn2_change_account(account: &mut Account) {
-    account.balance += 100;
-}
-
-fn learn2() {
-    header("L2 - Regarding Mutable References");
-
-    let mut account = Account::new(1, String::from("Func Onner"));
-
-    account.balance += 100;
-
-    println!("Account before change: {:#?}", account.yellow());
+    println!("{}, {}", num.blue(), other_num.bold());
 }
