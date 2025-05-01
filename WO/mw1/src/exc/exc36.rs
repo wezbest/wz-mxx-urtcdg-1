@@ -47,6 +47,10 @@ impl Bank {
 // Note: to add an element to a vector, you use the push method
 // like this: 'bank.accounts.push(account)
 
+fn ex1_add_account(bank: &mut Bank, account: Account) {
+    bank.accounts.push(account);
+}
+
 fn ex1() {
     header("Exc 36.1 - Mutable reference");
 
@@ -54,6 +58,7 @@ fn ex1() {
     let account = Account::new(1, String::from("me"));
 
     // TODO: call the 'add_account' function here
+    ex1_add_account(&mut bank, account);
 
     // Note: we're using the Bank value here, so 'bank' still
     // needs ownership of that value
