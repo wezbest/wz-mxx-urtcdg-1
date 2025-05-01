@@ -60,4 +60,11 @@ fn br1() {
     br1_print_account(account_ref);
 
     println!("{:#?}", account.cyan());
+
+    let text1 = r"
+Printing out only the specific
+elements of the account struct.
+---
+";
+    println!("{}", text1.green());
 }
