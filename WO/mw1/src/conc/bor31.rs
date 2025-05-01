@@ -54,6 +54,10 @@ fn br1() {
     // Dont need to store the borrowed reference.
     let account_ref = &account;
 
+    // Making multiple reference to read only
+    let account_ref1 = &account;
+    let account_ref2 = &account;
+
     // Printing the account reference directly
     br1_print_account(&account);
 
@@ -67,8 +71,8 @@ elements of the account struct.
 ---
 ";
     println!("{}", text1.green());
-    println!("Account ID: {}", account.id);
-    println!("Account Holder: {}", account.holder);
-    println!("Account Balance: {}", account.balance);
+    println!("Account ID: {}", account_ref.id);
+    println!("Account Holder: {}", account_ref.holder);
+    println!("Account Balance: {}", account_ref.balance);
     println!("Account Reference: {:#?}", account_ref);
 }
