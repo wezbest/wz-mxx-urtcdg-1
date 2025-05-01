@@ -7,3 +7,4 @@ All excercises will be in this folder
 
 pub mod exc26;
 pub mod exc33;
+pub mod exc36;
