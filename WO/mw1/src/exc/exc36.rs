@@ -62,5 +62,5 @@ fn ex1() {
 
     // Note: we're using the Bank value here, so 'bank' still
     // needs ownership of that value
-    println!("{:#?}", bank);
+    println!("{:#?}", bank.green());
 }
