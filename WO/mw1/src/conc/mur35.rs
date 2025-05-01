@@ -75,4 +75,8 @@ fn learn2() {
     header("L2 - Regarding Mutable References");
 
     let mut account = Account::new(1, String::from("Func Onner"));
+
+    account.balance += 100;
+
+    println!("Account before change: {:#?}", account.yellow());
 }
