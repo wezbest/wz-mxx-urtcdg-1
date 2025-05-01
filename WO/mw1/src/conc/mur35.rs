@@ -43,8 +43,16 @@ fn learn1_print_account(account: &Account) {
     println!("{:#?}", account.yellow());
 }
 
+fn learn1_change_account(account: &mut Account) {
+    account.balance += 100;
+}
+
 fn learn1() {
     header("L1 - Regarding Mutable References");
 
     let mut account = Account::new(1, String::from("Func Onner"));
+
+    learn1_change_account(&mut account);
+
+    println!("Account after change: {:#?}", account.yellow());
 }
