@@ -48,7 +48,7 @@ impl Bank {
 // like this: 'bank.accounts.push(account)
 
 fn ex1_add_account(bank: &mut Bank, account: Account) {
-    bank.accounts.push(account);
+    bank.accounts.push(account); // Pushing info into the acount
 }
 
 fn ex1() {
