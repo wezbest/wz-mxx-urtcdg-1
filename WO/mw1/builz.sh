@@ -33,7 +33,6 @@ build_linux() {
     h1 "Building for x86_64-unknown-linux-gnu"
     if cargo build --release --target x86_64-unknown-linux-gnu; then
         echo -e "${GREEN}GNU build successful!${NC}"
-        echo -e "Binary location: ${YELLOW}target/x86_64-unknown-linux-gnu/release/mw1${NC}"
     else
         echo -e "${RED}GNU build failed!${NC}"
         return 1
@@ -52,7 +51,6 @@ build_linux() {
     h1 "Building for x86_64-unknown-linux-musl (static)"
     if cargo build --release --target x86_64-unknown-linux-musl; then
         echo -e "${GREEN}MUSL build successful!${NC}"
-        echo -e "Binary location: ${YELLOW}target/x86_64-unknown-linux-musl/release/mw1${NC}"
     else
         echo -e "${RED}MUSL build failed!${NC}"
         return 1
@@ -72,9 +70,15 @@ build_linux() {
         echo -e "${YELLOW}Warning: Failed to strip MUSL binary${NC}"
     fi
 
-    echo -e "\n${GREEN}All builds completed successfully!${NC}"
+    # Show final binary locations
+    h1 "Build Results"
+    echo -e "${GREEN}All builds completed successfully!${NC}"
+    echo -e "\n${BOLD}Binary locations:${NC}"
+    echo -e "• GNU build:    ${YELLOW}$(pwd)/target/x86_64-unknown-linux-gnu/release/mw1${NC}"
+    echo -e "• MUSL build:   ${YELLOW}$(pwd)/target/x86_64-unknown-linux-musl/release/mw1${NC}"
+    echo -e "\nYou can copy these binaries to your desired location."
+
     return 0
 }
-
 # Excution
 build_linux

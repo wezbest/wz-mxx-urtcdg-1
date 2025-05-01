@@ -67,4 +67,8 @@ elements of the account struct.
 ---
 ";
     println!("{}", text1.green());
+    println!("Account ID: {}", account.id);
+    println!("Account Holder: {}", account.holder);
+    println!("Account Balance: {}", account.balance);
+    println!("Account Reference: {:#?}", account_ref);
 }
