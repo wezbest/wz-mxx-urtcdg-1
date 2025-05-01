@@ -44,29 +44,7 @@ fn learn1_print_account(account: &Account) {
 }
 
 fn learn1() {
-    header("F2 - Moving Vaues on Borrowed References");
+    header("L1 - Regarding Mutable References");
 
-    let account = Account::new(1, String::from("Func Onner"));
-
-    // Dont need to store the borrowed reference.
-    let account_ref = &account;
-
-    // Making multiple reference to read only
-    let account_ref1 = &account;
-    let account_ref2 = &account;
-
-    learn1_print_account(account_ref);
-
-    println!("{:#?}", account.cyan());
-
-    let text1 = r"
-Printing out only the specific
-elements of the account struct.
----
-";
-    println!("{}", text1.green());
-    println!("Account ID: {}", account_ref.id);
-    println!("Account Holder: {}", account_ref.holder);
-    println!("Account Balance: {}", account_ref.balance);
-    println!("Account Reference: {:#?}", account_ref);
+    let mut account = Account::new(1, String::from("Func Onner"));
 }
