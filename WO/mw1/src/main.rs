@@ -14,7 +14,8 @@ mod exc;
 // use exc::exc33::exc33_main;
 // use exc::exc36::exc36_main;
 // use conc::mur35::mur35_main;
+use conc::copy28::kopy28_main;
 
 fn main() {
-    exc36_main();
+    kopy28_main();
 }
