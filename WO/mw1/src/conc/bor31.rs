@@ -51,9 +51,11 @@ fn br1() {
 
     let account = Account::new(1, String::from("Func Onner"));
 
+    // Dont need to store the borrowed reference.
     let account_ref = &account;
 
     br1_print_account(account_ref);
+    br1_print_account(&account);
 
     println!("{:#?}", account.cyan());
 }
