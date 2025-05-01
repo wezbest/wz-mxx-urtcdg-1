@@ -12,5 +12,4 @@ exc26 - Chapter 26 - Rust Excercises
 #![allow(unused_imports)]
 
 pub mod bor31;
-pub mod exc26;
 pub mod own24;

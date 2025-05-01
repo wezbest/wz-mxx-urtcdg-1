@@ -15,4 +15,4 @@
 |     [`s1`](./s1/)     |                                        Section 1 work                                        |
 |   [`sec3`](./sec3/)   |                                Section 3 work in this folder                                 |
 |   [`conc`](./conc/)   |                                   Testing varius concepts                                    |
-|   [`conc`](./conc/)   |                         Testing varius concepts. includes excercise                          |
+|    [`exc`](./exc/)    |                                    Exercises from lesson                                     |
