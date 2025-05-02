@@ -9,7 +9,7 @@ use yansi::Paint;
 
 pub fn wo1_main() {
     pswg("Sectin 4 Lifetimes".to_string());
-    func2();
+    // func2();
 }
 
 /////// Struct array and impl ///////
