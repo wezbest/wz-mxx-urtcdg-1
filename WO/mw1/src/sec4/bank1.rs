@@ -25,8 +25,8 @@ fn sbtest() {
 // * Main struct
 #[derive(Debug)]
 struct Account {
-    balance: u32,
     id: u32,
+    balance: i32,
     holder: String,
 }
 
@@ -37,6 +37,11 @@ impl Account {
             holder,
             balance: 0,
         }
+    }
+
+    fn deposit(&mut self, amount: i32) -> i32 {
+        self.balance += amount;
+        self.balance
     }
 }
 
