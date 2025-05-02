@@ -3,7 +3,9 @@ Bank utility functions
 here
 */
 
-fn get_input_amount() -> i32 {
+use std::io;
+
+pub fn get_input_amount() -> i32 {
     loop {
         let mut input = String::new();
         println!("Enter amount to deposit:");

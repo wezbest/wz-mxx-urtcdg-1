@@ -4,6 +4,7 @@ Section 4  - Bank Project
 */
 
 // Impors
+use super::but::get_input_amount;
 use crate::utils::{header, pswg};
 use std::io;
 use yansi::Paint;
