@@ -5,6 +5,7 @@ Section 4  - Bank Project
 
 // Impors
 use crate::utils::{header, pswg};
+use std::io;
 use yansi::Paint;
 
 //////// /// Main function call ////////////
@@ -68,6 +69,8 @@ impl Bank {
     }
 }
 
+//// Utility Functions Here ////////////
+
 //// Sub Function 1 Here ////////////
 
 fn sb_main_bank() {
@@ -77,11 +80,13 @@ fn sb_main_bank() {
     let mut bank = Bank::new();
     let mut account = Account::new(1, "Alice".to_string());
 
+    // Get input for deposit
+    let deposit_amount = get_input_amount();
     // Deposit and withdraw some money
-    account.deposit(1000);
+    account.deposit(deposit_amount);
 
     // Withdraw some money
-    account.withdraw(250);
+    // account.withdraw(250);
 
     bank.add_account(account);
 
