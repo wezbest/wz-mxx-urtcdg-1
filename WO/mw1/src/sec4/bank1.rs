@@ -39,8 +39,15 @@ impl Account {
         }
     }
 
+    // Account deposit function - receives an amount and adds it to the balance
     fn deposit(&mut self, amount: i32) -> i32 {
         self.balance += amount;
+        self.balance
+    }
+
+    // Account withdraw function - receives an amount and subtracts it from the balance
+    fn withdraw(&mut self, amount: i32) -> i32 {
+        self.balance -= amount;
         self.balance
     }
 }
@@ -68,9 +75,15 @@ fn sb_main_bank() {
     header("Bank Project");
 
     let mut bank = Bank::new();
-    let account1 = Account::new(1, "Alice".to_string());
+    let mut account = Account::new(1, "Alice".to_string());
 
-    bank.add_account(account1);
+    // Deposit and withdraw some money
+    account.deposit(1000);
+
+    // Withdraw some money
+    account.withdraw(250);
+
+    bank.add_account(account);
 
     println!("Bank: {:#?}", bank.magenta());
 }
