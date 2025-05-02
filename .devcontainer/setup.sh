@@ -13,7 +13,8 @@ sudo apt update && sudo apt install -y \
   build-essential \
   software-properties-common \
   libssl-dev \
-  lsb-release
+  lsb-release \
+  procps
 
 # ----------------------
 # Install Latest Python (3.12)
@@ -32,9 +33,9 @@ wget https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz
 sudo rm -rf /usr/local/go
 sudo tar -C /usr/local -xzf go${GO_VERSION}.linux-amd64.tar.gz
 
-echo 'export PATH=$PATH:/usr/local/go/bin' >>~/.bashrc
-echo 'export GOROOT=/usr/local/go' >>~/.bashrc
-echo 'export GOPATH=$HOME/go' >>~/.bashrc
+echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.bashrc
+echo 'export GOROOT=/usr/local/go' >> ~/.bashrc
+echo 'export GOPATH=$HOME/go' >> ~/.bashrc
 source ~/.bashrc
 
 go version || true
@@ -72,7 +73,7 @@ export HOMEBREW_NO_ENVIRONMENT_PRESERVE=1
 
 # Setup brew in environment
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >>~/.bashrc
+echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.bashrc
 
 brew --version || true
 
@@ -80,25 +81,36 @@ brew --version || true
 brew install starship fzf fd ripgrep bat exa zoxide
 
 # ----------------------
-# Install Docker (no prompts)
+# Install Docker (Automated, No Interaction)
 # ----------------------
-sudo apt install -y apt-transport-https ca-certificates curl software-properties-common
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
+sudo apt update
+sudo apt install -y \
+  apt-transport-https \
+  ca-certificates \
+  curl \
+  gnupg \
+  software-properties-common
 
+# Add Docker GPG key
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --batch --yes --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+# Add Docker repo
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+# Update and install Docker
 sudo apt update
 sudo apt install -y docker-ce docker-ce-cli containerd.io
 
-# Add current user to docker group
+# Add current user to docker group (suppress error if already exists)
 sudo usermod -aG docker $(whoami) || true
 
-# Start Docker daemon (if not already running)
-sudo dockerd >/tmp/docker.log 2>&1 &
+# Start Docker daemon in background
+sudo dockerd > /tmp/docker.log 2>&1 &
 
-# Wait a second for Docker to initialize
+# Wait for Docker to initialize
 sleep 5
 
-docker --version || true
+# Test Docker install
 docker info || true
 
 # ----------------------
@@ -126,6 +138,12 @@ corepack prepare pnpm@latest --activate
 
 # Verify installation
 pnpm --version || true
+
+# ----------------------
+# Ensure Fish has correct PATH
+# ----------------------
+mkdir -p ~/.config/fish
+echo 'set -gx PATH $PATH /usr/bin /usr/local/bin' >> ~/.config/fish/config.fish
 
 # ----------------------
 # Done!
