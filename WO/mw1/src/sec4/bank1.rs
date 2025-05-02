@@ -60,9 +60,12 @@ impl Bank {
 
 fn sb_main_bank() {
     pswg("Main Bank Function".to_string());
+    header("Bank Project");
 
-    let bank = Bank::new();
+    let mut bank = Bank::new();
     let account1 = Account::new(1, "Alice".to_string());
 
     bank.add_account(account1);
+
+    println!("Bank: {:#?}", bank.magenta());
 }
