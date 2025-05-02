@@ -16,9 +16,9 @@ mod sec4;
 // use exc::exc36::exc36_main;
 // use conc::mur35::mur35_main;
 // use conc::copy28::kopy28_main;
-
-use sec4::wo1::wo1_main;
+// use sec4::wo1::wo1_main;
+use sec4::bank1::bank1_main;
 
 fn main() {
-    wo1_main();
+    bank1_main();
 }

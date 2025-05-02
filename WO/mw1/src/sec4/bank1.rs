@@ -1,9 +1,11 @@
 /*
-Section 3 - Bank Project work
+Section 4  - Bank Project
+- Thii is the same file from sec3/bank1.rs
 */
 
 // Impors
 use crate::utils::{header, pswg};
+use yansi::Paint;
 
 //////// /// Main function call ////////////
 pub fn bank1_main() {
@@ -48,23 +50,19 @@ impl Bank {
     fn new() -> Self {
         Bank { accounts: vec![] }
     }
+
+    fn add_account(&mut self, account: Account) {
+        self.accounts.push(account);
+    }
 }
 
-// Helper function to print account
-fn print_account(account: Account) {
-    println!("{:#?}", account);
-}
+//// Sub Function 1 Here ////////////
 
 fn sb_main_bank() {
     pswg("Main Bank Function".to_string());
 
-    // Creating a new bank
     let bank = Bank::new();
-    // Creating account in the new bank
-    let account = Account::new(1, String::from("me"));
+    let account1 = Account::new(1, "Alice".to_string());
 
-    // Printing the structs
-    // println!("{:#?}", bank);
-    print_account(account);
-    print_account(account);
+    bank.add_account(account1);
 }
