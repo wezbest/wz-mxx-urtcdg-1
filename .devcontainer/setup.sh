@@ -78,7 +78,7 @@ echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.bashrc
 brew --version || true
 
 # Optional: Add common tools via brew
-brew install starship fzf fd ripgrep bat exa zoxide
+brew install fzf 
 
 # ----------------------
 # Install Docker (Automated, No Interaction)
@@ -144,6 +144,7 @@ pnpm --version || true
 # ----------------------
 mkdir -p ~/.config/fish
 echo 'set -gx PATH $PATH /usr/bin /usr/local/bin' >> ~/.config/fish/config.fish
+echo "alias exa='eza'" >> ~/.config/fish/config.fish
 
 # ----------------------
 # Done!
@@ -158,3 +159,4 @@ echo " - Homebrew"
 echo " - Docker (no sudo needed)"
 echo " - Node.js (LTS)"
 echo " - PNPM package manager"
+echo " - Tools: starship, fzf, fd, ripgrep, bat, eza (exa), zoxide"
