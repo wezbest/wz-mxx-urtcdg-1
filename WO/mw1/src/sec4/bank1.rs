@@ -82,12 +82,12 @@ fn sb_main_bank() {
     let mut account = Account::new(1, "Alice".to_string());
 
     // Get input for deposit
-    let deposit_amount = get_input_amount();
+    // let deposit_amount = get_input_amount();
     // Deposit and withdraw some money
-    account.deposit(deposit_amount);
+    account.deposit(1000);
 
     // Withdraw some money
-    // account.withdraw(250);
+    account.withdraw(250);
 
     bank.add_account(account);
 
