@@ -12,7 +12,8 @@ sudo apt update && sudo apt install -y \
   git \
   build-essential \
   software-properties-common \
-  libssl-dev
+  libssl-dev \
+  lsb-release
 
 # ----------------------
 # Install Latest Python (3.12)
@@ -31,9 +32,9 @@ wget https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz
 sudo rm -rf /usr/local/go
 sudo tar -C /usr/local -xzf go${GO_VERSION}.linux-amd64.tar.gz
 
-echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.bashrc
-echo 'export GOROOT=/usr/local/go' >> ~/.bashrc
-echo 'export GOPATH=$HOME/go' >> ~/.bashrc
+echo 'export PATH=$PATH:/usr/local/go/bin' >>~/.bashrc
+echo 'export GOROOT=/usr/local/go' >>~/.bashrc
+echo 'export GOPATH=$HOME/go' >>~/.bashrc
 source ~/.bashrc
 
 go version || true
@@ -49,31 +50,93 @@ rustc --version || true
 cargo --version || true
 
 # ----------------------
-# Install Fish Shell (3.6+)
+# Install Fish Shell (latest from PPA)
 # ----------------------
 sudo apt-add-repository ppa:fish-shell/release-3 -y
 sudo apt update
 sudo apt install -y fish
 
-fish --version || true
-
-# Set Fish as default shell for user
+# Set Fish as default shell
 sudo chsh -s $(which fish) $(whoami)
 
-# ----------------------
-# Install Homebrew (Linuxbrew)
-# ----------------------
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fish --version || true
 
-echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.bashrc
+# ----------------------
+# Install Homebrew (Linuxbrew) Automatically
+# ----------------------
+export HOMEBREW_NO_AUTO_UPDATE=1
+export HOMEBREW_NO_INSTALL_PROMPT=1
+export HOMEBREW_NO_ENVIRONMENT_PRESERVE=1
+
+/bin/bash -c 'CI=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
+
+# Setup brew in environment
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >>~/.bashrc
 
 brew --version || true
 
-# Optional: Install brew packages (uncomment if needed)
-# brew install starship fzf fd ripgrep
+# Optional: Add common tools via brew
+brew install starship fzf fd ripgrep bat exa zoxide
+
+# ----------------------
+# Install Docker (no prompts)
+# ----------------------
+sudo apt install -y apt-transport-https ca-certificates curl software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
+
+sudo apt update
+sudo apt install -y docker-ce docker-ce-cli containerd.io
+
+# Add current user to docker group
+sudo usermod -aG docker $(whoami) || true
+
+# Start Docker daemon (if not already running)
+sudo dockerd >/tmp/docker.log 2>&1 &
+
+# Wait a second for Docker to initialize
+sleep 5
+
+docker --version || true
+docker info || true
+
+# ----------------------
+# Install Node.js (Latest LTS via NVM)
+# ----------------------
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+
+# Load nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+# Install and use latest LTS Node
+nvm install --lts
+node --version || true
+npm --version || true
+
+# ----------------------
+# Install PNPM via Corepack (No sudo, no prompt)
+# ----------------------
+# Enable corepack
+corepack enable
+
+# Install latest pnpm version
+corepack prepare pnpm@latest --activate
+
+# Verify installation
+pnpm --version || true
 
 # ----------------------
 # Done!
 # ----------------------
-echo "✅ Setup complete! Python, Go, Rust, Fish, and Brew installed."
+echo "✅ Setup complete! All tools installed and ready to use."
+echo "🎉 You now have:"
+echo " - Python 3.12"
+echo " - Go 1.22"
+echo " - Rust"
+echo " - Fish Shell"
+echo " - Homebrew"
+echo " - Docker (no sudo needed)"
+echo " - Node.js (LTS)"
+echo " - PNPM package manager"
