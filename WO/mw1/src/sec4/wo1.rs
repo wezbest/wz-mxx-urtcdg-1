@@ -55,20 +55,20 @@ fn func1() {
     func1_makenprint();
 }
 
-/// Sub Function2 ////
+// Sub Function2
 
-fn func2_makenprint() -> &Account {
-    let account = Account::new(1, String::from("ButyDanc"));
+// fn func2_makenprint() -> &Account {
+//     let account = Account::new(1, String::from("ButyDanc"));
 
-    println!("{:#?}", account.yellow());
+//     println!("{:#?}", account.yellow());
 
-    &account
-}
+//     &account
+// }
 
-fn func2() {
-    header("Sub Function 2 - Actual example of lifetimes");
+// fn func2() {
+//     header("Sub Function 2 - Actual example of lifetimes");
 
-    let acc_ref = func2_makenprint();
+//     let acc_ref = func2_makenprint();
 
-    println!("{}", acc_ref.balance.cyan());
-}
+//     println!("{}", acc_ref.balance.cyan());
+// }
